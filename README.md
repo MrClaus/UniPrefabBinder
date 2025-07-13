@@ -55,6 +55,20 @@ The attribute's brackets indicate the object's name in the prefab hierarchy. If 
 
 If you have objects inside your prefab with other components implemented (which also have binding attributes), they will be automatically bound regardless of whether you access them by attributes or not. This recursive binding gives more freedom in implementing complex components for UI and other objects.
 
+Use the `Instantiate` method of `PrefabBinder` to get the bound component (prefab) into your scene:
+```c#
+public class ExampleForScene : MonoBehaviour
+{
+    private void Start()
+    {
+        ExamplePrefabController prefab = PrefabBinder.Instantiate<ExamplePrefabController>(transform);
+        Debug.Log($"Binded prefab name={prefab.name}");
+    }
+}
+```
+
+If you loaded a prefab resource with a custom loader, you can use the `TryBind<T>` extended method on it to get the same binding `T` component of your prefab.
+
 ## Install via git URL
 Requires a version of unity that supports path query parameter for git packages (Unity >= 2019.3.4f1, Unity >= 2020.1a21). You can add `https://github.com/MrClaus/UniPrefabBinder.git?path=Assets/UniPrefabBinder/Main` to Package Manager
 
