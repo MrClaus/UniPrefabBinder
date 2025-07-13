@@ -85,5 +85,27 @@ The Unity package files will also contain `examples` of how to use the library. 
 
 ![image](https://raw.githubusercontent.com/MrClaus/UniPrefabBinder/main/.github/images/upm_install_3.png)
 
+## Install via OpenUPM
+Add a new `OpenUPM` registry to the `Package Manager`, and specify the package name with the desired version in `manifest.json`. Package page on the OpenUPM website: [UniPrefabBinder](https://openupm.com/packages/com.github.mrclaus.uniprefabbinder/)
+
+```json
+{
+  "dependencies": {
+    ...
+    "com.github.mrclaus.uniprefabbinder": "1.0.0"
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        ...
+        "com.github.mrclaus.uniprefabbinder"
+      ]
+    }
+  ]
+}
+```
+
 ## License
 This library is under the MIT License.
