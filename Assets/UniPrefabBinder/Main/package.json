@@ -1,0 +1,12 @@
+{
+  "name": "com.github.mrclaus.uniprefabbinder",
+  "displayName": "UniPrefabBinder",
+  "author": { "name": "MrClaus (Gifo)", "url": "martin.gifo@gmail.com" },
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "description": "Library for fast prefab binding. Nice architectural solution through attributes.",
+  "keywords": [ "unity", "prefab", "binding", "binder", "attribute", "instantiate" ],
+  "license": "MIT",
+  "category": "Unity",
+  "dependencies": {}
+}
