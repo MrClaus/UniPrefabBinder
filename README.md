@@ -1,7 +1,7 @@
 UniPrefabBinder
 ===
 [![Releases](https://img.shields.io/github/release/MrClaus/UniPrefabBinder.svg)](https://github.com/MrClaus/UniPrefabBinder/releases)
-[![Github all releases](https://img.shields.io/github/downloads/MrClaus/UniPrefabBinder/total.svg)](https://gitHub.com/MrClaus/UniPrefabBinder/releases/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 Library for fast prefab binding. Nice architectural solution through attributes.
 Easily use binding attributes in your own component descriptions to describe the behavior of prefabs on the scene.
