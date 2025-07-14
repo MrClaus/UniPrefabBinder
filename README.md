@@ -11,6 +11,8 @@ Easily use binding attributes in your own component descriptions to describe the
 * `[ObjectBinding]` - for GameObject binding
 * `[PrefabPath]` - to describe the path to your prefab in the `Resources` folder
 
+The binding fields of your prefab will already be available the first time the `Awake()` method is executed:
+
 ```c#
 [PrefabPath("UniPrefabBinder/ExamplePrefab")]
 public class ExamplePrefabController : MonoBehaviour
