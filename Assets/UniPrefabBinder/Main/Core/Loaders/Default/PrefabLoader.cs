@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace UniPrefabBinder.Main.Core.Loaders.Default
 {
-    public class PrefabLoader : IResourceLoader, IResourceLoaderByTask
+    internal class PrefabLoader : IResourceLoader, IResourceLoaderByTask
     {
         internal const int TIMEOUT = 60;
         
