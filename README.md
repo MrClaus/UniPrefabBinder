@@ -124,7 +124,7 @@ Requires a version of unity that supports path query parameter for git packages 
 
 or add `"com.github.mrclaus.uniprefabbinder": "https://github.com/MrClaus/UniPrefabBinder.git?path=Assets/UniPrefabBinder/Main"` to `Packages/manifest.json`.
 
-If you want to set a target version, UniPrefabBinder uses the `*.*.*` release tag so you can specify a version like `#1.1.0`. For example `https://github.com/MrClaus/UniPrefabBinder.git?path=Assets/UniPrefabBinder/Main#1.1.0`.
+If you want to set a target version, UniPrefabBinder uses the `*.*.*` release tag so you can specify a version like `#1.1.1`. For example `https://github.com/MrClaus/UniPrefabBinder.git?path=Assets/UniPrefabBinder/Main#1.1.1`.
 
 ## Install via Unity package file (.unitypackage)
 The Unity package files will also contain `examples` of how to use the library. The package files (.unitypackage) for each version can be found in the [Releases](https://gitHub.com/MrClaus/UniPrefabBinder/releases/) section
@@ -138,7 +138,7 @@ Add a new `OpenUPM` registry to the `Package Manager`, and specify the package n
 {
   "dependencies": {
     ...
-    "com.github.mrclaus.uniprefabbinder": "1.1.0"
+    "com.github.mrclaus.uniprefabbinder": "1.1.1"
   },
   "scopedRegistries": [
     {
