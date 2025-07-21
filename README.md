@@ -9,7 +9,40 @@ Easily use binding attributes in your own component descriptions to describe the
 ## Attributes used:
 * `[ComponentBinding]` - for component binding
 * `[ObjectBinding]` - for GameObject binding
-* `[PrefabPath]` - to describe the path to your prefab in the `Resources` folder
+* `[PrefabPath]` - to describe the path to your prefab, go to the `Resources` folder (with the standard loader), or you can write your own loader by implementing the interface(s) `IResourceLoader`, `IResourceLoaderByTask` and declare it `PrefabBinder.LoaderSet.Add(...)`
+
+Implementing your own loader may be necessary if your resources and prefabs are loaded, for example, via `Aaddressables`:
+
+```c#
+public class CustomLoader : IResourceLoader, IResourceLoaderByTask
+{
+    public async UniTask<T> LoadAddressableAsync<T>(string path) where T : Object
+    {
+        ...
+        return result as T;
+    }
+
+    public T LoadAddressable<T>(string path) where T : Object
+    {
+        ...
+        return result as T;
+    }
+
+    // implement IResourceLoader
+    public T Load<T>(string path) where T : Object => LoadAddressable<T>(path);
+
+    // implement IResourceLoaderByTask
+    public async Task<T> LoadAsync<T>(string path) where T : Object => await LoadAddressableAsync<T>(path).AsTask();
+}
+```
+
+Further declaration of the loader in your project should go as follows:
+
+```c#
+var loader = new CustomLoader();
+PrefabBinder.LoaderSet.Add((IResourceLoader) loader)
+                      .Add((IResourceLoaderByTask) loader);
+```
 
 The binding fields of your prefab will already be available the first time the `Awake()` method is executed:
 
@@ -63,8 +96,19 @@ public class ExampleForScene : MonoBehaviour
 {
     private void Start()
     {
+        Bind();
+    }
+    
+    private void Bind()
+    {
         ExamplePrefabController prefab = PrefabBinder.Instantiate<ExamplePrefabController>(transform);
         Debug.Log($"Binded prefab name={prefab.name}");
+    }
+
+    private async Task BindAsync()
+    {
+        ExamplePrefabController prefab = await PrefabBinder.InstantiateAsync<ExamplePrefabController>(transform);
+        Debug.Log($"Binded (async) prefab name={prefab.name}");
     }
 }
 ```
