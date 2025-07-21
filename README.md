@@ -11,7 +11,7 @@ Easily use binding attributes in your own component descriptions to describe the
 * `[ObjectBinding]` - for GameObject binding
 * `[PrefabPath]` - to describe the path to your prefab, go to the `Resources` folder (with the standard loader), or you can write your own loader by implementing the interface(s) `IResourceLoader`, `IResourceLoaderByTask` and declare it `PrefabBinder.LoaderSet.Add(...)`
 
-Implementing your own loader may be necessary if your resources and prefabs are loaded, for example, via `Aaddressables`:
+Implementing your own loader may be necessary if your resources and prefabs are loaded, for example, via `Addressables`:
 
 ```c#
 public class CustomLoader : IResourceLoader, IResourceLoaderByTask
