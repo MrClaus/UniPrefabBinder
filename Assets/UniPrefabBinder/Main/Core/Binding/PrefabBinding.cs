@@ -9,8 +9,7 @@ namespace UniPrefabBinder.Main.Core.Binding
 {
     internal class PrefabBinding : IBinding
     {
-        private readonly List<ObjectBinding> _objectBindings = new List<ObjectBinding>();
-        private readonly List<ComponentBinding> _componentBindings = new List<ComponentBinding>();
+        private readonly List<IBinding> _subBindings = new List<IBinding>();
         private Type PrefabType { get; }
         
         public PrefabBinding(Type type)
@@ -22,8 +21,7 @@ namespace UniPrefabBinder.Main.Core.Binding
         public void Bind(GameObject prefab, MonoBehaviour component = null, bool isParent = true)
         {
             component = (MonoBehaviour) (prefab.GetComponent(PrefabType) ?? prefab.AddComponent(PrefabType));
-            _objectBindings.ForEach(o => o.Bind(prefab, component));
-            _componentBindings.ForEach(c => c.Bind(prefab, component));
+            _subBindings.ForEach(o => o.Bind(prefab, component, isParent));
 
             if (!isParent) {
                 return;
@@ -48,10 +46,10 @@ namespace UniPrefabBinder.Main.Core.Binding
                 foreach (Attribute attribute in fieldInfo.GetCustomAttributes(false)) {
                     switch (attribute) {
                         case ComponentBindingAttribute componentAttr:
-                            _componentBindings.Add(new ComponentBinding(componentAttr.ComponentName, fieldInfo, fieldInfo.FieldType));
+                            _subBindings.Add(new ComponentBinding(componentAttr.ComponentName, fieldInfo, fieldInfo.FieldType));
                             break;
                         case ObjectBindingAttribute objectAttr:
-                            _objectBindings.Add(new ObjectBinding(objectAttr.ObjectName, fieldInfo));
+                            _subBindings.Add(new ObjectBinding(objectAttr.ObjectName, fieldInfo));
                             break;
                     }
                 }

@@ -1,5 +1,5 @@
-using System;
 using System.Reflection;
+using UniPrefabBinder.Main.Core.Exception;
 using UnityEngine;
 
 namespace UniPrefabBinder.Main.Core.Binding
@@ -14,7 +14,7 @@ namespace UniPrefabBinder.Main.Core.Binding
         {
             GameObject child = GetChildByName(prefab, Name);
             if (child == null) {
-                throw new ArgumentException($"Error binding object with name '{Name}' in component '{component.gameObject.name}'");
+                throw new PrefabBindException(PrefabBindErrorStatus.OBJECT, Name, component.GetType());
             }
 
             SetField(component, child);

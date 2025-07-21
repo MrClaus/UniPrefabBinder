@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using UniPrefabBinder.Main.Core.Exception;
 using UnityEngine;
 
 namespace UniPrefabBinder.Main.Core.Binding
@@ -16,14 +17,12 @@ namespace UniPrefabBinder.Main.Core.Binding
         public void Bind(GameObject prefab, MonoBehaviour component, bool isParent = true)
         {
             if (!typeof(Component).IsAssignableFrom(ComponentType)) {
-                throw new ArgumentException($"Bad component type '{ComponentType.Name}' for object='{Name}'" 
-                                            + $" in prefab='{prefab.name}' at behaviour='{component.GetType().Name}'");
+                throw new PrefabBindException(PrefabBindErrorStatus.COMPONENT, ComponentType.Name, component.GetType());
             }
 
             Component childComponent = (Name == null ? prefab : GetChildByName(prefab, Name))?.GetComponent(ComponentType);
             if (childComponent == null) {
-                throw new ArgumentException($"Not found component for child name='{Name}' and type='{ComponentType.Name}' "
-                                            + $" in prefab='{prefab.name}' at behaviour='{component.GetType().Name}'");
+                throw new PrefabBindException(PrefabBindErrorStatus.COMPONENT, ComponentType.Name, component.GetType());
             }
             
             SetField(component, childComponent);

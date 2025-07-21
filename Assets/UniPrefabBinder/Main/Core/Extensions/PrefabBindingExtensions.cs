@@ -1,4 +1,4 @@
-using System;
+using UniPrefabBinder.Main.Core.Exception;
 using UnityEngine;
 
 namespace UniPrefabBinder.Main.Core.Extensions
@@ -10,9 +10,9 @@ namespace UniPrefabBinder.Main.Core.Extensions
         {
             var component = prefab?.GetComponent<T>();
             if (component == null) {
-                throw new ArgumentException($"Not found type '{typeof(T)}' for prefab binding. Prefab name={prefab?.name}");
+                throw new PrefabBindException(PrefabBindErrorStatus.MISSING, prefab?.name, typeof(T));
             }
-
+            
             return PrefabBinder.DoBind<T>(prefab, parent);
         }
     }
